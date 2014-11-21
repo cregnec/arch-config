@@ -2,7 +2,7 @@
 " " This must be first, because it changes other options as a side effect.
 set nocompatible
 "pathogen runtime path and plugin
-execute pathogen#infect()
+execute autoload#pathogen#infect()
 "make backspace work like most other apps
 set backspace=2
 set backspace=indent,eol,start
