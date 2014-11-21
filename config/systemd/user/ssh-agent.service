@@ -1,0 +1,12 @@
+#https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
+#echo export ${XDG_RUNTIME_DIR}/openssh_auth_sock >> .zshrc
+[Unit]
+Description=Openssh private key ssh-agent
+
+[Service]
+ExecStart=/usr/bin/ssh-agent -d -a %t/openssh_auth_sock
+#ExecStop=/usr/bin/ssh-agent -k
+ExecStopPost=rm %t/openssh_auth_sock
+
+[Install]
+WantedBy=default.target
