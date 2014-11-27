@@ -27,7 +27,7 @@ set smartcase
 "set clipboard register to unmanedplus +
 set clipboard=unamedplus
 "highlight search pattern matches
-:set hlsearch
+set hlsearch
 "vim-latexsuite
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
 filetype plugin on
@@ -45,3 +45,8 @@ let g:Tex_SmartKeyDot=0
 "Also, this installs to /usr/share/vim/vimfiles, which may not be in
 "% your runtime path (RTP). Be sure to add it too, e.g:
 "set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+"highlight overlength column
+set colorcolumn=80
+"textwidth=79
+set textwidth=79
+
