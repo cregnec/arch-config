@@ -1,0 +1,9 @@
+!xterm fonts
+xterm*faceName: DejaVu Sans Mono:style=Book:antialias=false 
+!chinese characters
+xterm*faceNameDoublesize: SourceHanSansCN
+xterm*faceSize: 12
+!use color in place of bold and italics (archlinux wiki)
+xterm*boldMode: false
+xterm*colorBDMode: false
+xterm*colorBD: rgb:82/a4/d3
