@@ -1,8 +1,9 @@
 " Use Vim settings, rather then Vi settings (much better!).
 set nocompatible
-"pathogen runtime
+" git submodule in .vim/autoload
+runtime autoload/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
-"make backspace work like most other apps
+" make backspace work like most other apps
 set backspace=2
 set backspace=indent,eol,start
 "syntax hilighting
@@ -41,15 +42,15 @@ set fileencoding=utf-8
 "set mouse=a
 "map <ScrollWheelUp> <C-Y>
 "map <ScrollWheelDown> <C-E>
-"javascript
+" javascript tab
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2
-"do not expand tab for makefile
+" do not expand tab for makefile
 autocmd FileType make setlocal noexpandtab
-"column number
+" column number
 set number
-"ruler
+" ruler
 set ruler
-"show command in the last line of screen
+" show command
 set showcmd
 "NERDTree
 map <C-n> :NERDTreeToggle<CR>
