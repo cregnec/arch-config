@@ -1,3 +1,12 @@
 [submodule "config-awesome"]
 	path = config/awesome
 	url = git@github.com:awailly/awesome.git
+[submodule "vim-pathogen"]
+	path = vim/autoload/pathogen
+	url = git@github.com:tpope/vim-pathogen.git
+[submodule "vim-nerdtree"]
+	path = vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "vim-tagbar"]
+	path = vim/bundle/tagbar
+	url = git@github.com:majutsushi/tagbar.git
