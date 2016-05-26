@@ -1,7 +1,12 @@
 # Bind F11 and F12 (NOT F1 and F2) to previous and next screen window
 bindkey -k F1 prev
 bindkey -k F2 next
-#
+# Bind F1, F2, F3, F4 to window 0,1,2,3
+bindkey -k k1 select 0
+bindkey -k k2 select 1
+bindkey -k k3 select 2
+bindkey -k k4 select 3
+
 startup_message off
 vbell off
 defscrollback 5000
