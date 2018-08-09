@@ -6,10 +6,11 @@ archlinux configurations, vim, screen, ssh-agent, awesome
 INSTALL
 =======
 
-git clone git@github.com:cregnec/arch-config ~/
+git clone git@github.com:cregnec/arch-config .
 
-cd
+cd arch-config 
 
-git submodule init
+git submodule update --init --recursive
 
-git submodule update
+./install.sh
+
