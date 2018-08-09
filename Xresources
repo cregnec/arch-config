@@ -1,16 +1,28 @@
+! Xft settings ---------------------------------------------------------
+Xft.autohint:   0
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xft.lcdfilter: lcddefault
+
+! XTerm ----------------------------------------------------------------
+XTerm.termName: xterm-256color
 !xterm fonts
 !xterm*faceName: Liberation Mono:style=Regular
 !xterm*faceName: Meslo LG L DZ:style=Regular
-xterm*faceName: Meslo LG L:style=Regular
+XTerm*faceName: Meslo LG M:style=Regular
 !chinese characters
-xterm*faceNameDoublesize: SourceHanSansCN
-xterm*faceSize: 18
+XTerm*faceNameDoublesize: SourceHanSansCN
+XTerm*faceSize: 16
 !use color in place of bold and italics (archlinux wiki)
-xterm*boldMode: false
-xterm*colorBDMode: false
-xterm*colorBD: rgb:82/a4/d3
-XTerm*eightBitInput:   false
+XTerm*boldMode: false
+XTerm*colorBDMode: false
+XTerm*colorBD: rgb:82/a4/d3
+XTerm*eightBitInput: false
 XTerm*metaSendsEscape: true
+XTerm*locale: true
 
 !XTerm*VT100.translations: #override \n\
 !        <Key>Prior:       scroll-back(1,page) \n\
@@ -27,33 +39,90 @@ XTerm*VT100.scrollbar.translations:#override \n\
      <Btn1Motion>:MoveThumb() NotifyThumb() \n\
      <BtnUp>:  NotifyScroll(Proportional) EndScroll()
 
-! white text on black background
-XTerm.VT100*color0: white
-XTerm.VT100*color15: black
-! Probably unnecessary, but to be safe:
-XTerm*foreground: rgb:FF/FF/FF
-XTerm*background: rgb:00/00/00
-
 ! Scrollbar on the right
 XTerm*rightScrollBar: true
-XTerm*ScrollBar: true
+XTerm*VT100.scrollbar.width: 8
 
 ! not Prevent entering more text from causing a scroll-to-end
-XTerm*scrollTtyOutput: true
+*scrollTtyOutput: true
 
 ! Allow 5000 lines of history, rather than the default 64!
 XTerm*savelines: 5000
 
-!Triple-click selects the whole history
-XTerm.vt100.on3Clicks: all
-
-
-! do not scroll with output
-URxvt*scrollTtyOutput: false
-
-! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*scrollWithBuffer: true
-
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
 
+! enable scrollbar
+URxvt*scrollBar:          true
+! scrollbar width
+URxvt*thickness:          5
+! scrollbar color
+URxvt*scrollColor:        #1E1E1E
+! scrollbar trough area color
+!URxvt*troughColor:        #333333
+! scrollbar without a trough
+!URxvt*scrollBar_floating: false
+URxvt*scrollBar_right: true
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+
+! Base16 Oxide
+! Scheme: Diki Ananta (https://github.com/dikiaap)
+
+#define base00 #212121
+#define base01 #343D46
+#define base02 #4F5B66
+#define base03 #65737E
+#define base04 #A7ADBA
+#define base05 #C0C5CE
+#define base06 #CDD3DE
+#define base07 #F3F4F5
+#define base08 #E57373
+#define base09 #F99157
+#define base0A #FAC863
+#define base0B #A6BC69
+#define base0C #5FB3B3
+#define base0D #6699CC
+#define base0E #C594C5
+#define base0F #AB7967
+
+*foreground:   base05
+#ifdef background_opacity
+*background:   [background_opacity]base00
+#else
+*background:   base00
+#endif
+*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06
+
+! fonts
+!
+! xft fonts
+URxvt*font: xft:monaco:size=14
+URxvt*boldFont: xft:monaco:size=14
+URxvt.letterSpace: -4
