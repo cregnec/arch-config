@@ -14,7 +14,7 @@ termcapinfo xterm ti@:te@
 #
 # # Window list at the bottom.
 hardstatus alwayslastline
-hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%c %{g}]'
+hardstatus string '%{= KG}[ %{G}%H %{g}][%= %{= Kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%c %{g}]'
 #
 # # From Stephen Shirley
 # # Don't block command output if the terminal stops responding
@@ -36,3 +36,9 @@ altscreen on
 attrcolor b ".I"
 # # tell screen how to set colors. AB = background, AF=foreground
 # #termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# put this in your ~/.screenrc to make
+# ^A D (uppercase) switch on, and
+# ^A U (uppercase) switch off, converting
+# CR (return keys) input into CRLF
+bind D bindkey "\015" stuff "\015\012"
+bind U bindkey "\015" stuff "\015"
