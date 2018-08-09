@@ -1,12 +1,52 @@
 !xterm fonts
-xterm*faceName: DejaVu Sans Mono:style=Book:antialias=false 
+!xterm*faceName: Liberation Mono:style=Regular
+!xterm*faceName: Meslo LG L DZ:style=Regular
+xterm*faceName: Meslo LG L:style=Regular
 !chinese characters
 xterm*faceNameDoublesize: SourceHanSansCN
-xterm*faceSize: 12
+xterm*faceSize: 18
 !use color in place of bold and italics (archlinux wiki)
 xterm*boldMode: false
 xterm*colorBDMode: false
 xterm*colorBD: rgb:82/a4/d3
+XTerm*eightBitInput:   false
+XTerm*metaSendsEscape: true
+
+!XTerm*VT100.translations: #override \n\
+!        <Key>Prior:       scroll-back(1,page) \n\
+!        <Key>Next:        scroll-forw(1,page) \n\
+!        Ctrl<Key>Home:    scroll-back(1000,page) \n\
+!        Ctrl<Key>End:     scroll-forw(1000,page) \n\
+!        <Btn1Up>:         select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n
+
+! Make the scrollbar behave as it should in a modern gui
+XTerm*VT100.scrollbar.translations:#override \n\
+     <Btn5Down>:StartScroll(Forward) \n\
+     <Btn1Down>:StartScroll(Continuous) MoveThumb() NotifyThumb() \n\
+     <Btn4Down>:StartScroll(Backward) \n\
+     <Btn1Motion>:MoveThumb() NotifyThumb() \n\
+     <BtnUp>:  NotifyScroll(Proportional) EndScroll()
+
+! white text on black background
+XTerm.VT100*color0: white
+XTerm.VT100*color15: black
+! Probably unnecessary, but to be safe:
+XTerm*foreground: rgb:FF/FF/FF
+XTerm*background: rgb:00/00/00
+
+! Scrollbar on the right
+XTerm*rightScrollBar: true
+XTerm*ScrollBar: true
+
+! not Prevent entering more text from causing a scroll-to-end
+XTerm*scrollTtyOutput: true
+
+! Allow 5000 lines of history, rather than the default 64!
+XTerm*savelines: 5000
+
+!Triple-click selects the whole history
+XTerm.vt100.on3Clicks: all
+
 
 ! do not scroll with output
 URxvt*scrollTtyOutput: false

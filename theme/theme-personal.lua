@@ -183,9 +183,9 @@ local bat = lain.widget.bat({
     end
 })
 
--- ALSA volume
+-- PULSE volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
-theme.volume = lain.widget.alsa({
+theme.volume = lain.widget.pulse({
     settings = function()
         if volume_now.muted == "yes" then
             volume_now.level = "Muted"
@@ -193,7 +193,7 @@ theme.volume = lain.widget.alsa({
             volume_now.level = volume_now.left .. "%"
         end
 
-        widget:set_markup(markup.fontfg(theme.font, "#7493d2", volume_now.level .. "% "))
+        widget:set_markup(markup.fontfg(theme.font, "#7493d2", volume_now.level))
     end
 })
 

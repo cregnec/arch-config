@@ -58,7 +58,7 @@ local function run_once(cmd_arr)
     end
 end
 
--- run_once({ "urxvtd", "unclutter -root" }) -- entries must be separated by commas
+run_once({ "urxvtd", "unclutter -root" }) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
 --[[
@@ -90,7 +90,7 @@ local themes = {
 local chosen_theme = themes[5]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "urxvtc"
+local terminal     = "xterm"
 local editor       = os.getenv("EDITOR") or "vim"
 local gui_editor   = "subl"
 local browser      = "firefox"
@@ -237,11 +237,13 @@ globalkeys = my_table.join(
     awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
               {description = "lock screen", group = "hotkeys"}),
 
+    -- keyboard layout indicator
+    awful.key({ altkey }, "Shift_R", function () if beautiful.kbdcfg then beautiful.kbdcfg.next(beautiful.kbdcfg) end end,
+              {description = "lock screen", group = "hotkeys"}),
+
     -- Hotkeys
     -- awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
     --          {description = "show help", group="awesome"}),
-    awful.key({ modkey,           }, "s", function() awful.spawn("slock") end,
-              {description="screen lock", group="awesome"}),
     awful.key({ modkey,           }, "p", function() xrandr.xrandr() end,
               {description="xrandr", group="awesome"}),
     -- Tag browsing
@@ -406,31 +408,31 @@ globalkeys = my_table.join(
     -- ALSA volume control
     awful.key({ altkey }, "Up",
         function ()
-            os.execute(string.format("pactl set-sink-volume %s +1%%", beautiful.volume.index))
+            os.execute(string.format("pactl set-sink-volume %s +1%%", beautiful.volume.device))
             beautiful.volume.update()
         end,
         {description = "volume up", group = "hotkeys"}),
     awful.key({ altkey }, "Down",
         function ()
-            os.execute(string.format("pactl set-sink-volume %s -1%%", beautiful.volume.index))
+            os.execute(string.format("pactl set-sink-volume %s -1%%", beautiful.volume.device))
             beautiful.volume.update()
         end,
         {description = "volume down", group = "hotkeys"}),
     awful.key({ altkey }, "m",
         function ()
-            os.execute(string.format("pactl set-sink-mute %s toggle", beautiful.volume.index))
+            os.execute(string.format("pactl set-sink-mute %s toggle", beautiful.volume.device))
             beautiful.volume.update()
         end,
         {description = "toggle mute", group = "hotkeys"}),
     awful.key({ altkey, "Control" }, "m",
         function ()
-            os.execute(string.format("pactl set-sink-volume %s 100%%", beautiful.volume.channel))
+            os.execute(string.format("pactl set-sink-volume %s 100%%", beautiful.volume.device))
             beautiful.volume.update()
         end,
         {description = "volume 100%", group = "hotkeys"}),
     awful.key({ altkey, "Control" }, "0",
         function ()
-            os.execute(string.format("pactl set-sink-volume %s 0%%", beautiful.volume.channel))
+            os.execute(string.format("pactl set-sink-volume %s 0%%", beautiful.volume.device))
             beautiful.volume.update()
         end,
         {description = "volume 0%", group = "hotkeys"}),
