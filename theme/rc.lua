@@ -148,6 +148,8 @@ awful.util.tasklist_buttons = my_table.join(
             c.minimized = true
         else
             c:emit_signal("request::activate", "tasklist", {raise = true})
+            client.focus = c
+            c:raise()
         end
     end),
     awful.button({ }, 3, function ()
@@ -238,7 +240,7 @@ globalkeys = my_table.join(
               {description = "lock screen", group = "hotkeys"}),
 
     -- keyboard layout indicator
-    awful.key({ altkey }, "Shift_R", function () if beautiful.kbdcfg then beautiful.kbdcfg.next(beautiful.kbdcfg) end end,
+    awful.key({ altkey }, "Shift_R", function () if beautiful.kbdcfg then beautiful.kbdcfg:next() end end,
               {description = "lock screen", group = "hotkeys"}),
 
     -- Hotkeys
@@ -610,7 +612,7 @@ for i = 1, 10 do
     )
 end
 
-clientbuttons = gears.table.join(
+clientbuttons = my_table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
     end),
@@ -647,11 +649,11 @@ awful.rules.rules = {
 
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
-      properties = { titlebars_enabled = true } },
+      properties = { titlebars_enabled = false } },
 
     -- Set Firefox to always map on the first tag on screen 1.
-    { rule = { class = "Firefox" },
-      properties = { screen = 1, tag = awful.util.tagnames[1] } },
+    -- { rule = { class = "Firefox" },
+    --  properties = { screen = 1, tag = awful.util.tagnames[1] } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
