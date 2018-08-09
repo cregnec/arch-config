@@ -9,7 +9,7 @@ set backspace=indent,eol,start
 "syntax hilighting
 syntax on
 "colorscheme
-colorscheme torte
+colorscheme molokai
 "auto indenting
 set autoindent
 "shiftwidth
@@ -39,7 +39,7 @@ set fileencoding=utf-8
 "paste
 "set paste
 "mouse scroll
-"set mouse=a
+set mouse=a
 "map <ScrollWheelUp> <C-Y>
 "map <ScrollWheelDown> <C-E>
 " javascript tab
