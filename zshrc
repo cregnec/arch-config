@@ -91,10 +91,33 @@ autoload -U select-word-style
 select-word-style bash
 
 #ssh-agent
-export SSH_AUTH_SOCK=/run/user/1000/openssh_auth_sock
+#export SSH_AUTH_SOCK=/run/user/1000/openssh_auth_sock
+eval `keychain --eval --quiet`
 
 #set editor
 export EDITOR=vim
 
 #ls alias
 alias ls='ls --color=auto'
+## Use a long listing format ##
+alias ll='ls -la'
+
+## a quick way to get out of current directory ##
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+
+## Colorize the grep command output for ease of use (good for log files)##
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+## tree alias
+alias tree='tree -C'
+
+function set_title()
+{
+    echo -ne "\033]0;${1}\007"
+}
+alias title=set_title
