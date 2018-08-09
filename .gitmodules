@@ -1,6 +1,6 @@
 [submodule "config-awesome"]
 	path = config/awesome
-	url = https://github.com/awailly/awesome.git
+	url = https://github.com/lcpz/awesome-copycats.git
 [submodule "vim-pathogen"]
 	path = vim/autoload/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
