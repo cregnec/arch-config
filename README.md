@@ -14,3 +14,18 @@ git submodule update --init --recursive
 
 ./install.sh
 
+# Packages
+- numlockx
+- keychain
+- arandr
+- sublime text
+- pulseaudio
+- pavucontrol
+- xss-lock 
+- slock
+- xbacklight
+- xsel
+- zathura-pdf-poppler
+- tlp
+- xautolock
+- feh
