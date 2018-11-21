@@ -12,5 +12,5 @@ if [ ! -d ~/.config/awesome ]; then
 fi
 
 cp -r $wd/config/awesome/* ~/.config/awesome/
-cp $wd/config/awesome/theme/* ~/.config/awesome/
+cp $wd/theme/* ~/.config/awesome/
 mv ~/.config/awesome/theme-personal.lua ~/.config/awesome/themes/multicolor/
