@@ -22,7 +22,6 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
                       require("awful.hotkeys_popup.keys")
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 
-local xrandr        = require("xrandr")
 -- }}}
 
 -- {{{ Error handling
@@ -94,14 +93,18 @@ local terminal     = "xterm"
 local editor       = os.getenv("EDITOR") or "vim"
 local gui_editor   = "subl"
 local browser      = "firefox"
+local arandr = "arandr"
 local guieditor    = "subl"
 local scrlocker    = "slock"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "term", "dev", "web", "vault", "im", "vm", "odsi", "p2a", "tfm", "other" }
 awful.layout.layouts = {
-    awful.layout.suit.floating,
+    awful.layout.suit.max,
     awful.layout.suit.tile,
+    awful.layout.suit.max,
+    awful.layout.suit.floating,
+    awful.layout.suit.max,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
@@ -246,8 +249,6 @@ globalkeys = my_table.join(
     -- Hotkeys
     -- awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
     --          {description = "show help", group="awesome"}),
-    awful.key({ modkey,           }, "p", function() xrandr.xrandr() end,
-              {description="xrandr", group="awesome"}),
     -- Tag browsing
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -315,14 +316,29 @@ globalkeys = my_table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
+
+    -- awful.key({ modkey,           }, "Tab",
+    --     function ()
+    --         awful.client.focus.history.previous()
+    --         if client.focus then
+    --             client.focus:raise()
+    --         end
+    --     end,
+    --     {description = "go back", group = "client"}),
+
+
     awful.key({ modkey,           }, "Tab",
         function ()
-            awful.client.focus.history.previous()
-            if client.focus then
+            for c in awful.client.iterate(function(c)
+                return c.first_tag == awful.screen.focused().selected_tag 
+                    end)
+                do
+                client.focus = c
                 client.focus:raise()
             end
         end,
-        {description = "go back", group = "client"}),
+        {description = "iterate over all clients on the current tag", group = "client"}),
+
 
     -- Show/Hide Wibox
     awful.key({ modkey }, "b", function ()
@@ -398,8 +414,8 @@ globalkeys = my_table.join(
               {description = "show calendar", group = "widgets"}),
     awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
               {description = "show filesystem", group = "widgets"}),
-    awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
-              {description = "show weather", group = "widgets"}),
+    -- awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
+    --          {description = "show weather", group = "widgets"}),
 
     -- Brightness
     awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
@@ -407,20 +423,36 @@ globalkeys = my_table.join(
     awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
               {description = "-10%", group = "hotkeys"}),
 
+    -- Dispaly 
+    awful.key({ }, "XF86Display", function () awful.spawn("arandr") end,
+              {description = "arandr", group = "hotkeys"}),
+
     -- ALSA volume control
     awful.key({ altkey }, "Up",
         function ()
-            os.execute(string.format("pactl set-sink-volume %s +1%%", beautiful.volume.device))
+            os.execute(string.format("pactl set-sink-volume %s +10%%", beautiful.volume.device))
             beautiful.volume.update()
         end,
-        {description = "volume up", group = "hotkeys"}),
+        {description = "volume up +10%", group = "hotkeys"}),
     awful.key({ altkey }, "Down",
         function ()
-            os.execute(string.format("pactl set-sink-volume %s -1%%", beautiful.volume.device))
+            os.execute(string.format("pactl set-sink-volume %s -10%%", beautiful.volume.device))
             beautiful.volume.update()
         end,
         {description = "volume down", group = "hotkeys"}),
-    awful.key({ altkey }, "m",
+    awful.key({ }, "XF86AudioRaiseVolume",
+        function ()
+            os.execute(string.format("pactl set-sink-volume %s +10%%", beautiful.volume.device))
+            beautiful.volume.update()
+        end,
+        {description = "volume up +10%", group = "hotkeys"}),
+    awful.key({ }, "XF86AudioLowerVolume",
+        function ()
+            os.execute(string.format("pactl set-sink-volume %s -10%%", beautiful.volume.device))
+            beautiful.volume.update()
+        end,
+        {description = "volume down", group = "hotkeys"}),
+    awful.key({ }, "XF86AudioMute",
         function ()
             os.execute(string.format("pactl set-sink-mute %s toggle", beautiful.volume.device))
             beautiful.volume.update()
@@ -490,6 +522,8 @@ globalkeys = my_table.join(
               {description = "run browser", group = "launcher"}),
     awful.key({ modkey }, "a", function () awful.spawn(guieditor) end,
               {description = "run gui editor", group = "launcher"}),
+    awful.key({ modkey }, "p", function () awful.spawn(arandr) end,
+              {description = "run arandr", group = "launcher"}),
 
     -- Default
     --[[ Menubar

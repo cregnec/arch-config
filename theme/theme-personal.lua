@@ -16,7 +16,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
 theme.wallpaper                                 = theme.confdir .. "/wall.png"
-theme.font                                      = "xos4 Terminus 8"
+theme.font                                      = "xos4 Terminus 13"
 theme.menu_bg_normal                            = "#000000"
 theme.menu_bg_focus                             = "#000000"
 theme.bg_normal                                 = "#000000"
@@ -109,17 +109,17 @@ theme.cal = lain.widget.calendar({
 })
 
 -- Weather
-local weathericon = wibox.widget.imagebox(theme.widget_weather)
-theme.weather = lain.widget.weather({
-    city_id = 2988507, -- placeholder (Paris)
-    notification_preset = { font = "xos4 Terminus 10", fg = theme.fg_normal },
-    weather_na_markup = markup.fontfg(theme.font, "#eca4c4", "N/A "),
-    settings = function()
-        descr = weather_now["weather"][1]["description"]:lower()
-        units = math.floor(weather_now["main"]["temp"])
-        widget:set_markup(markup.fontfg(theme.font, "#eca4c4", descr .. " @ " .. units .. "°C "))
-    end
-})
+-- local weathericon = wibox.widget.imagebox(theme.widget_weather)
+-- theme.weather = lain.widget.weather({
+--     city_id = 2988507, -- placeholder (Paris)
+--     notification_preset = { font = "xos4 Terminus 10", fg = theme.fg_normal },
+--     weather_na_markup = markup.fontfg(theme.font, "#eca4c4", "N/A "),
+--     settings = function()
+--         descr = weather_now["weather"][1]["description"]:lower()
+--         units = math.floor(weather_now["main"]["temp"])
+--         widget:set_markup(markup.fontfg(theme.font, "#eca4c4", descr .. " @ " .. units .. "°C "))
+--     end
+-- })
 
 -- / fs
 local fsicon = wibox.widget.imagebox(theme.widget_fs)
@@ -203,11 +203,11 @@ local netdowninfo = wibox.widget.textbox()
 local netupicon = wibox.widget.imagebox(theme.widget_netup)
 local netupinfo = lain.widget.net({
     settings = function()
-        if iface ~= "network off" and
-           string.match(theme.weather.widget.text, "N/A")
-        then
-            theme.weather.update()
-        end
+        -- if iface ~= "network off" and
+        --    string.match(theme.weather.widget.text, "N/A")
+        -- then
+        --     theme.weather.update()
+        -- end
 
         widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
         netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
@@ -325,8 +325,8 @@ function theme.at_screen_connect(s)
             cpu.widget,
             fsicon,
             theme.fs.widget,
-            weathericon,
-            theme.weather.widget,
+            --weathericon,
+            --theme.weather.widget,
             tempicon,
             temp.widget,
             baticon,
